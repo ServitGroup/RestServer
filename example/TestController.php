@@ -2,11 +2,11 @@
 
 use \Jacwright\RestServer\RestException;
 
-class TestController
+class TestController  extends BaseController
 {
     /**
      * Returns a JSON string object to the browser when hitting the root of the domain
-     *
+     * @noAuth
      * @url GET /
      */
     public function test()
@@ -18,7 +18,7 @@ class TestController
      * Logs in a user with the given username and password POSTed. Though true
      * REST doesn't believe in sessions, it is often desirable for an AJAX server.
      *
-     * @url POST /login
+     * @url POST /logintest
      */
     public function login()
     {
