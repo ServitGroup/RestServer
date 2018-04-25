@@ -111,7 +111,12 @@ Next we have to `saveUser`. You see here we have multiple URL mappings again. Th
 but POSTing a new user object for our saveUser method could look like this:
 
 ```json
-{ "username": "bob", "password": "supersecretpassword", "firstName": "Bob", "lastName": "Smith" }
+{
+  "username": "bob",
+  "password": "supersecretpassword",
+  "firstName": "Bob",
+  "lastName": "Smith"
+}
 ```
 
 So you’re able to allow POSTing JSON in addition to regular web style POSTs.
@@ -162,11 +167,11 @@ Authentication is unique for each application. But tying your authentication mec
 
 You can select authentication and authorization methods as per your requirements you can implement only `autenticate` if you want to confirm client identity. Or you can implement both, then `authorize` can help to confirm if current client is allowed to access a certain action. For more details about authentication. and how to use `JWT` token as bearer header please check example file `TestAuthControll.php`.
 
-Currently default authentication handler support **Basic** and **Bearer** headers based authentication. and pass `[username, password]` or `bearer token` respectively to `authenticate()` method in your controller. In case you want to authenticate clients using some other method like cookies, You can do that inside `authenticate` method. You may replace default authentication handler by passing your own implementation of `AuthServer` interface to RestServer instance. like 
+Currently default authentication handler support **Basic** and **Bearer** headers based authentication. and pass `[username, password]` or `bearer token` respectively to `authenticate()` method in your controller. In case you want to authenticate clients using some other method like cookies, You can do that inside `authenticate` method. You may replace default authentication handler by passing your own implementation of `AuthServer` interface to RestServer instance. like
 
 ```php
     /**
-     * include following lines after $server = new RestServer($mode); 
+     * include following lines after $server = new RestServer($mode);
      */
     $server->authHandler = new myAuthServer();
 ```
@@ -180,7 +185,7 @@ For security reasons, browsers restrict cross-origin HTTP or REST requests initi
 ```php
     /**
      *
-     * include following lines after $server = new RestServer($mode); 
+     * include following lines after $server = new RestServer($mode);
      */
      $server->useCors = true;
      $server->allowedOrigin = 'http://example.com';
@@ -191,13 +196,14 @@ For security reasons, browsers restrict cross-origin HTTP or REST requests initi
 ```
 
 ### Working with files
-Using Multipart with REST APIs is a bad idea and neither it is supported by `RestServer`. RestServer uses direct file upload approach like S3 services. you can upload one file per request without any additional form data. 
+
+Using Multipart with REST APIs is a bad idea and neither it is supported by `RestServer`. RestServer uses direct file upload approach like S3 services. you can upload one file per request without any additional form data.
 
 * **Upload:**
-In file uploads action you may use two special parameters in method definition. `$data` and `$mime` first parameter will hold file content and the `$mime` parameter can provide details about file content type.
+  In file uploads action you may use two special parameters in method definition. `$data` and `$mime` first parameter will hold file content and the `$mime` parameter can provide details about file content type.
 
 * **Download:**
-RestServer will start a file download in case a action return `SplFileInfo` object.
+  RestServer will start a file download in case a action return `SplFileInfo` object.
 
 For more details please check `upload` and `download` methods in example.
 
@@ -229,7 +235,6 @@ You may provide errors to your API users easily by throwing an excetion with the
     }
 ```
 
-
 You have control over how your REST service handles errors. You can add an error controller using `$server->addErrorClass('ErrorController');`. This controller can define methods named `handle401` or `handle404` to add your own custom error handling logic.
 
 # Installation
@@ -250,3 +255,5 @@ composer install
 cd <your project>
 composer require 'jacwright/restserver:dev-master'
 ```
+
+link for POSTMAN API CLIENT TEST https://www.getpostman.com/collections/a420618cd4e0619fdc44
